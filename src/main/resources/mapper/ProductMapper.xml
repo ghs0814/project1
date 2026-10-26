@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project1.mapper.ProductMapper">
+
+    <select id="findAll"
+            resultType="com.example.project1.domain.Product">
+
+        SELECT
+        product_id,
+        product_name,
+        price,
+        quantity
+        FROM products
+        ORDER BY product_id
+
+    </select>
+    <select id="findById"
+            resultType="com.example.project1.domain.Product">
+
+        SELECT
+        product_id,
+        product_name,
+        price,
+        quantity
+        FROM products
+        WHERE product_id = #{productId}
+
+    </select>
+
+    <insert id="insert"
+            useGeneratedKeys="true"
+            keyProperty="productId"
+            keyColumn="product_id">
+
+        INSERT INTO products (
+        product_name,
+        price,
+        quantity
+        )
+        VALUES (
+        #{productName},
+        #{price},
+        #{quantity}
+        )
+
+    </insert>
+    <update id="update">
+
+        UPDATE products
+        SET
+        product_name = #{productName},
+        price = #{price},
+        quantity = #{quantity}
+        WHERE product_id = #{productId}
+
+    </update>
+    <delete id="deleteById">
+        DELETE from products
+        WHERE product_id = #{productId}
+
+    </delete>
+</mapper>
